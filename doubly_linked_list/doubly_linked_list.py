@@ -33,6 +33,27 @@ class LinkeListDouble:
         self.head = None
         self.tail = None
     
+    def show(self):
+        n = self.head
+        if n == None:
+            print('there are no nodes in this linked list')
+        while n != None:
+            print(n.value)
+            n = n.next
+
+    
+    def add_to_head(self,val):
+        self.head = Node(val)
+        print(f'set {self.head.value} as the head of the linkedlist')
+
+
+ll = LinkeListDouble()
+ll.add_to_head(6)
+ll.show()
+
+
+
+
 
 
     
