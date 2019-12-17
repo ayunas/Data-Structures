@@ -34,7 +34,6 @@ class ListNode:
         if self.next:
             self.next.prev = self.prev
 
-
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
 
@@ -48,14 +47,47 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
+    def display(self):
+        n = self.head
+        while n != None :
+            print('\t')
+            print(n.value)
+            if n.prev:
+                print('n.prev', n.prev.value)
+            else:
+                print('no prev value for', n.value)
+            if n.next:
+                print('n.next', n.next.value)
+            else:
+                print('no next value for ', n.value)
+            
+            n = n.next
+
+
     def add_to_head(self, value):
-        pass
+        old_head = self.head
+        # old_next = self.head.next
+        self.head = ListNode(value)
+        self.head.next = old_head
+        old_head.prev = self.head
+
 
     def remove_from_head(self):
-        pass
+        if self.head.next == None:
+            self.head = None
+        else:
+            self.head = self.head.next
 
     def add_to_tail(self, value):
-        pass
+        n = self.head
+        while n.next != None:
+            prev = n
+            n = n.next
+            n.prev = prev
+
+        n.next = ListNode(value)
+        n.next.prev = n
+        self.tail = n.next
 
     def remove_from_tail(self):
         pass

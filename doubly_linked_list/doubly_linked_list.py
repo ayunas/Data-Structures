@@ -52,12 +52,22 @@ class LinkeListDouble:
             n = n.next
         n.next = self.tail
         print('tail of linked list: ', self.tail.value)
-
+    
+    def remove_from_head(self):
+        removed = self.head
+        print('removed', removed.value)
+        self.head = self.head.next
+        return removed.value
+    
+    def remove_from_tail(self,val):
+        pass
 
 ll = LinkeListDouble()
 ll.add_to_head(6)
 ll.add_to_tail(7)
 ll.add_to_tail(20)
+ll.add_to_tail(30)
+ll.remove_from_head()
 ll.show()
 
 
