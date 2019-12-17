@@ -41,14 +41,23 @@ class LinkeListDouble:
             print(n.value)
             n = n.next
 
-    
     def add_to_head(self,val):
         self.head = Node(val)
         print(f'set {self.head.value} as the head of the linkedlist')
+    
+    def add_to_tail(self,val):
+        n = self.head
+        self.tail = Node(val)
+        while n.next != None:
+            n = n.next
+        n.next = self.tail
+        print('tail of linked list: ', self.tail.value)
 
 
 ll = LinkeListDouble()
 ll.add_to_head(6)
+ll.add_to_tail(7)
+ll.add_to_tail(20)
 ll.show()
 
 
