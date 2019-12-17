@@ -21,41 +21,22 @@ as well as its next node in the List."""
         # get_max - highest value of list
 
 class Node:
-    def __init__(self,value,prev=None,next=None):
-        self.value = value
-        self.prev = prev
-        self.next = next
+    def __init__(self,val):
+        self.value = val
+        self.next = None
+        self.prev = None  #the prev property for each nodes turns it into a doubly linked list
+
+
+class LinkeListDouble:
+    # The DoublyLinkedList class itself should have the methods: add_to_head, add_to_tail, remove_from_head, remove_from_tail, move_to_front, move_to_end, delete, and get_max
+    def __init__(self):
+        self.head = None
+        self.tail = None
     
-    def insert_after(self,val):
-        self.next = Node(val)
-        self.next.prev = self
+
+
     
-    def insert_before(self,val):
-        self.prev = Node(val)
-        self.prev.next = self
 
-
-class LinkedListDouble:
-    def __init__(self,node='head'):
-        self.head = node
-
-    def add_to_head(self,value):
-        self.head = Node(value)
-    
-    def print_ll(self):
-        node = self.head
-        while node:
-            print(node.value)
-            node = node.next
-
-
-one = Node(1)
-
-one.insert_after(2)
-
-ll = LinkedListDouble(one)
-
-ll.print_ll()
 
 
 
