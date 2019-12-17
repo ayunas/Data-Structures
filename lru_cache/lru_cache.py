@@ -1,22 +1,37 @@
 import random
 from doubly_linked_list import ListNode,DoublyLinkedList
 
-node = ListNode(3)
-node.insert_after(30)
-ll = DoublyLinkedList(node)
-ll.add_to_tail(50)
-ll.add_to_tail(75)
-ll.add_to_head(20)
-ll.display()
+# node = ListNode(3)
+# node.insert_after(30)
+# ll = DoublyLinkedList(node)
+# ll.add_to_tail(50)
+# ll.add_to_tail(75)
+# ll.add_to_head(20)
+# ll.display()
 
 # cache hit / cache miss
 # LRU = tail of doubly linked list
 # remove item from linked list and hash map
+# set up linked list with the most-recently used item at the head of the list and the least-recently used item at the tail:
+
+class Cache:
+    def __init__(self,newest,oldest):
+        self.MRU = ListNode(newest)
+        self.LRU = oldest
+        self.list = DoublyLinkedList(self.MRU)
+        self.list.add_to_head(1000)
+
+    def display(self):
+        n = self.list.head
+        while n != None:
+            print(n.value)
+            n = n.next
+        
 
 
 
-
-
+LRU = Cache(100,20)
+LRU.display()
 
 
 
