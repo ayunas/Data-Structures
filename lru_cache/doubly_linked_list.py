@@ -90,17 +90,35 @@ class DoublyLinkedList:
         self.tail = n.next
 
     def remove_from_tail(self):
-        pass
+        print('self.tail in remove_from_tail', self.tail.value, self.tail.prev.value)
+        self.tail.prev.next = None
+        self.tail = self.tail.prev
 
     def move_to_front(self, node):
         if self.head == node:
             print('node already at head')
             return self.head
-        node.prev.next = node.next  #point the prev node of the LRU node to the LRU's next node
-        node.prev = None  #becasue LRU node going to head, prev is None
-        node.next = self.head  #LRU node at head, so the next node pointing to the current self.head node
-        self.head = node  #officially make the self.head equal to the LRU node
-        return self.head
+        # if self.tail == node:
+        #     print('you hit the tail!')
+        #     print('self.tail', self.tail.value, 'self.head', self.head.value)
+        #     old_tail = self.tail
+        #     old_head = self.head
+        #     print(old_tail.value,old_head.value)
+        #     self.tail = old_tail.prev
+        #     old_tail.prev = None
+        #     self.head = old_tail
+        #     self.head.next = old_head
+        #     # self.tail.prev = self.tail
+        #     # self.tail.next = self.head
+        #     # self.head = self.tail
+            
+        if node.prev and node.next:
+            print('node.prev.next: ', node.prev.next.value, 'node.next: ', node.next.value)
+            node.prev.next = node.next  #point the prev node of the LRU node to the LRU's next node
+            node.prev = None  #becasue LRU node going to head, prev is None
+            node.next = self.head  #LRU node at head, so the next node pointing to the current self.head node
+            self.head = node  #officially make the self.head equal to the LRU node
+            return self.head
 
     def move_to_end(self, node):
         pass

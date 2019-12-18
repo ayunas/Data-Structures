@@ -40,7 +40,6 @@ class Cache:
                 return None
             n = n.next
         
-    
     def printhashmap(self):
         print('\nhashmap cache: \t')
         print('\t{')
@@ -49,13 +48,14 @@ class Cache:
         print('\t}\n')
 
     def access(self,val):
-        # print('hashmap len', len(self.hashmap))
-        # print(list(self.hashmap.values()))
         node = self.get_node_value(val)
-        # print('node_val', node)
+        print('node_val', node.value)
         if node == None:
             print('node not found in linked list')
             return None
+        if self.list.tail == node:
+            self.list.remove_from_tail()
+            self.list.add_to_head(node.value)
 
         if node.value in self.hashmap:
             cache_hit = self.hashmap[node.value]
@@ -82,16 +82,18 @@ class Cache:
 cache = Cache(100,20)
 cache.add_node(40)
 cache.add_node(50)
+cache.add_node(80)
+cache.add_node(87)
+
+cache.access(87)
+cache.access(87)
+cache.access(87)
+cache.access(80)
+cache.access(80)
+
+
 cache.displaylist()
-# cache.get_node_value(40)
-# cache.access(20)
-cache.access(40)
-cache.access(40)
-cache.access(40)
-cache.access(40)
-cache.access(40)
-cache.printhashmap()
-cache.displaylist()
+
 
 
 
