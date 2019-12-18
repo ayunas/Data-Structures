@@ -19,19 +19,63 @@ class Cache:
         self.MRU = ListNode(newest)
         self.LRU = oldest
         self.list = DoublyLinkedList(self.MRU)
-        self.list.add_to_head(1000)
+        # self.list.add_to_head(newest)  #add to head takes an int. DLL() takes in a node
+        self.list.add_to_tail(oldest)
+        self.hashmap = {}
 
-    def display(self):
+    def displaylist(self):
         n = self.list.head
         while n != None:
             print(n.value)
             n = n.next
+    
+    def get_node_value(self, search):
+        n = self.list.head
+        while n != None:
+            if n.value == search:
+                print('found node value', n.value)
+                return n.value
+            elif n.next == None:
+                print('no node value found')
+                return None
+            n = n.next
         
+    
+    def printhashmap(self):
+        for key in self.hashmap:
+            print('key', key, 'value', self.hashmap[key])
+
+    def access(self,node):
+        print('hashmap len', len(self.hashmap))
+        # print(list(self.hashmap.values()))
+
+        if node in self.hashmap:
+            cache_hit = self.hashmap[node]
+            print('cache_hit', cache_hit)
+        else:
+            if len(self.hashmap >= 5):
+                pass
+            else:
+                self.hashmap[node] = node.value
+                cache_miss = self.hashmap[node]
+                print('cache_miss.set the node to MRU and in the cache')
+
+    def evict(self):
+        pass
+
+    def add_node(self,val):
+        self.list.add_to_tail(val)
+
+
+cache = Cache(100,20)
+cache.add_node(40)
+cache.displaylist()
+cache.get_node_value(400)
+# cache.access(20)
 
 
 
-LRU = Cache(100,20)
-LRU.display()
+
 
 
 
