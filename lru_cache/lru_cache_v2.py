@@ -24,6 +24,8 @@ class LRUCache:
                 self.cache.pop(key)
                 self.cache[key] = value
             else:
+                # pull the first element off the array of the (key,value) pairs in the cache. the LRU is the 1st element in an ordered dictionary.  
+                # Then set incoming key to the incoming value from this set method
                 lru = list(self.cache.items())[0][0]
                 self.cache.pop(lru)
                 self.cache[key] = value
