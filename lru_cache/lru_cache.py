@@ -1,5 +1,6 @@
 import random
 from doubly_linked_list import ListNode,DoublyLinkedList
+import collections
 
 # node = ListNode(3)
 # node.insert_after(30)
@@ -14,8 +15,8 @@ from doubly_linked_list import ListNode,DoublyLinkedList
 # remove item from linked list and hash map
 # set up linked list with the most-recently used item at the head of the list and the least-recently used item at the tail:
 
-class Cache:
-    def __init__(self,newest,oldest):
+class LRUCache:
+    def __init__(self,newest=None,oldest=None):
         self.MRU = ListNode(newest)
         self.LRU = oldest
         self.list = DoublyLinkedList(self.MRU)
@@ -63,9 +64,9 @@ class Cache:
             self.list.move_to_front(cache_hit)
             return cache_hit
         else:
-            # if len(self.hashmap >= 5):
-            #     pass
-            # else:
+            if len(self.hashmap) > 3:
+                print('hashmap len = ', len(self.hashmap))
+                self.evict()
             self.hashmap[node.value] = node
             cache_miss = node
             print(f'cache_miss {cache_miss.value} added to cache')
@@ -73,26 +74,31 @@ class Cache:
             return cache_miss
 
     def evict(self):
-        pass
+        oldest = list(self.hashmap.keys())[0]
+        print('oldest key', oldest)
+        del self.hashmap[oldest]
+        print(f'{oldest} removed from cache, new hashmap cache: {str(self.hashmap)}')
 
     def add_node(self,val):
         self.list.add_to_tail(val)
 
+# cache = LRUCache(100,20)
+# cache.add_node(40)
+# cache.add_node(50)
+# cache.add_node(80)
 
-cache = Cache(100,20)
-cache.add_node(40)
-cache.add_node(50)
-cache.add_node(80)
-cache.add_node(87)
+# cache.access(80)
+# # cache.access(100)
 
-cache.access(87)
-cache.access(87)
-cache.access(87)
-cache.access(80)
-cache.access(80)
+# cache.access(50)
+# cache.access(40)
+# cache.access(20)
+# cache.access(100)
+# cache.access(80)
+# cache.access(50)
 
-
-cache.displaylist()
+# cache.printhashmap()
+# cache.displaylist()
 
 
 
