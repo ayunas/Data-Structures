@@ -25,11 +25,13 @@ class LRUCache:
                 self.cache[key] = value
             else:
                 lru = list(self.cache.items())[0][0]
-                lru_val = self.cache.pop(lru)
-                print('lru_val',lru_val)
-                #set new key/val to cache
-                print('new key', key, 'new_val', value)
+                self.cache.pop(lru)
                 self.cache[key] = value
+                
+                # lru_val = self.cache.pop(lru)
+                # print('lru_val',lru_val)
+                #set new key/val to cache
+                # print('new key', key, 'new_val', value)
         else:
             # value = self.cache.pop(key)
             self.cache[key] = value
