@@ -34,7 +34,7 @@ class Cache:
         while n != None:
             if n.value == search:
                 print('found node value', n.value)
-                return n.value
+                return n
             elif n.next == None:
                 print('no node value found')
                 return None
@@ -42,23 +42,30 @@ class Cache:
         
     
     def printhashmap(self):
+        print('\nhashmap cache: \t')
+        print('\t{')
         for key in self.hashmap:
-            print('key', key, 'value', self.hashmap[key])
+            print(f"\t '{key}' : {self.hashmap[key]}")
+        print('\t}\n')
 
-    def access(self,node):
+    def access(self,val):
         print('hashmap len', len(self.hashmap))
         # print(list(self.hashmap.values()))
+        node = self.get_node_value(val)
+        # print('node_val', node)
 
-        if node in self.hashmap:
-            cache_hit = self.hashmap[node]
+        if node.value in self.hashmap:
+            cache_hit = self.hashmap[node.value]
             print('cache_hit', cache_hit)
+            self.list.move_to_front(cache_hit)
+            return cache_hit
         else:
-            if len(self.hashmap >= 5):
-                pass
-            else:
-                self.hashmap[node] = node.value
-                cache_miss = self.hashmap[node]
-                print('cache_miss.set the node to MRU and in the cache')
+            # if len(self.hashmap >= 5):
+            #     pass
+            # else:
+            self.hashmap[node.value] = node
+            cache_miss = self.hashmap[node.value]
+            print(f'cache_miss. added {node.value} to cache')
 
     def evict(self):
         pass
@@ -69,9 +76,17 @@ class Cache:
 
 cache = Cache(100,20)
 cache.add_node(40)
+cache.add_node(50)
 cache.displaylist()
-cache.get_node_value(400)
-# cache.access(20)
+# cache.get_node_value(40)
+cache.access(20)
+cache.access(20)
+# cache.add_node(80)
+# cache.access(80)
+# cache.printhashmap()
+cache.displaylist()
+
+
 
 
 
