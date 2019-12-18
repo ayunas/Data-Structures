@@ -93,17 +93,14 @@ class DoublyLinkedList:
         pass
 
     def move_to_front(self, node):
-        node.prev.next = node.next
-        node.prev = None
-        node.next = self.head
-        self.head = node
-
-        # print(node.prev.value)
-        print(node.next.value)
-
-        print('LRU node', node.value)
-        # self.head = node
-        print('new self.head', self.head.value, 'self.head.next', self.head.next.value)
+        if self.head == node:
+            print('node already at head')
+            return self.head
+        node.prev.next = node.next  #point the prev node of the LRU node to the LRU's next node
+        node.prev = None  #becasue LRU node going to head, prev is None
+        node.next = self.head  #LRU node at head, so the next node pointing to the current self.head node
+        self.head = node  #officially make the self.head equal to the LRU node
+        return self.head
 
     def move_to_end(self, node):
         pass

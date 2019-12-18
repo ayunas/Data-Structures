@@ -49,14 +49,17 @@ class Cache:
         print('\t}\n')
 
     def access(self,val):
-        print('hashmap len', len(self.hashmap))
+        # print('hashmap len', len(self.hashmap))
         # print(list(self.hashmap.values()))
         node = self.get_node_value(val)
         # print('node_val', node)
+        if node == None:
+            print('node not found in linked list')
+            return None
 
         if node.value in self.hashmap:
             cache_hit = self.hashmap[node.value]
-            print('cache_hit', cache_hit)
+            print('cache_hit', cache_hit.value)
             self.list.move_to_front(cache_hit)
             return cache_hit
         else:
@@ -64,8 +67,10 @@ class Cache:
             #     pass
             # else:
             self.hashmap[node.value] = node
-            cache_miss = self.hashmap[node.value]
-            print(f'cache_miss. added {node.value} to cache')
+            cache_miss = node
+            print(f'cache_miss {cache_miss.value} added to cache')
+            self.list.move_to_front(cache_miss)
+            return cache_miss
 
     def evict(self):
         pass
@@ -79,11 +84,13 @@ cache.add_node(40)
 cache.add_node(50)
 cache.displaylist()
 # cache.get_node_value(40)
-cache.access(20)
-cache.access(20)
-# cache.add_node(80)
-# cache.access(80)
-# cache.printhashmap()
+# cache.access(20)
+cache.access(40)
+cache.access(40)
+cache.access(40)
+cache.access(40)
+cache.access(40)
+cache.printhashmap()
 cache.displaylist()
 
 
