@@ -42,17 +42,17 @@ class LRUCache:
         for key in self.cache:
             print('key:', key, 'value:', self.cache[key])
 
-# lru = LRUCache(3)
+lru = LRUCache(3)
 
-# lru.set('item1', 'a')
-# lru.set('item2', 'b')
-# lru.set('item3', 'c')
+lru.set('item1', 'a')
+lru.set('item2', 'b')
+lru.set('item3', 'c')
 
-# lru.set('item2', 'z')
+lru.set('item2', 'z')
 
 # lru.set('item-x', 'x')
 
-# # lru.print()
+lru.print()
 # # print(lru.get('item2'))
 
 # lru.print()
