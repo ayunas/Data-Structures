@@ -78,20 +78,22 @@ class BinarySearchTree:
                 # print('value > n.value ? ', value, n.value, 'n.right', n.right)
                 if not n.right:
                     n.right = Node(value)
-                    n.up = n
+                    n.right.up = n
                     n = n.right
                     break
                 else:
                     n = n.right
+                    # n.right.up = n
             elif value < n.value:
                 # print('value < n.value ? ', value, n.value, value < n.value)
                 if not n.left:
                     n.left = Node(value)
-                    n.up = n
+                    n.left.up = n
                     n = n.left
                     break
                 else:
                     n = n.left
+                    # n.left.up = n
         
         print('n.value', n.value)
 
@@ -105,48 +107,123 @@ class BinarySearchTree:
         print('time to traverse the tree in depth in order!')
         n = self.head
         # self.prints = 0 already initialized in the constructor
-        print('n',n.value)
 
-        while self.prints < self.size:
+        # while n and self.prints <= self.size+5:
+        while n:
+            print('\nn',n.value)
+            print('n.left', n.left)
+            if n.left is not None: print(n.left.value) 
+            print('n.right', n.right)
+            if n.right: print(n.right.value) 
+            print('\n')
+           
             #case 1:
             if n.left and n.right:
-                if n.printed:
-                    n = n.right
+                # print('n.printed', n.printed)
+                # print('n.left.printed?', n.left.printed)
+                # print('n.right.printed?', n.right.printed)
 
-                elif n.left.printed:
-                    if not n.up:
+                # if n.printed == False:
+
+                # if n.printed:
+                #     if not n.up:
+                #         break
+                #     else:
+                #         n = n.right
+                #         print('n moved right')
+
+                if n.left.printed and n.right.printed:
+                    if n.up:
+                        print('both left and right have been printed, n.value:')
                         print(n.value)
                         n.printed = True
                         self.prints = self.prints + 1
-                    else:
-                        if n.right.printed:
-                            n = n.up
-                        else:
-                            n = n.right
-                else: #not n.left.printed
+                        n = n.up
+                        print('n moved up')
+                    else: #no up
+                        print('total prints: ', self.prints)
+                        break  #exit condition from the while loop.  when left/right side is printed, and there is no up. ie. the root node
+                elif n.left.printed: #only
+                    print(n.value)
+                    n.printed = True
+                    self.prints = self.prints + 1
+                    n = n.right
+                    print('n moved to the right')
+
+                else: #n.left not printed , n.right not printed
+                    print('n moved to the lefty')
                     n = n.left
+
+                # elif n.left.printed:
+                #     if not n.up:
+                #         print('left and right, but no up since its probably the head')
+                #         print(n.value)
+                #         n.printed = True
+                #         self.prints = self.prints + 1
+                #     else: #up exists
+                #         if n.right.printed:
+                #             print('both left and right have been printed, n.value:')
+                #             print(n.value)
+                #             n.printed = True
+                #             self.prints = self.prints + 1
+                #             n = n.up
+                #             print('n moved up')
+                #         else:
+                #             n = n.right
+                #             print('n moved to the right')
+                # else: #n.left.printed == False
+                #     print('n moved to the lefty')
+                #     n = n.left
 
             #case 2:
             elif n.left and not n.right:
                 if n.left.printed:
+                    print('left but no right, n.value:')
                     print(n.value)
                     n.printed = True
                     self.prints = self.prints + 1
                     n = n.up
+                    print('n moved up')
                 else: #n.left.printed == False  # not n.left.printed
                     n = n.left
+                    print('n moved to the left')
+
             #case 3:
             elif n.right and not n.left:
-                print(n.value)
-                n.printed = True
-                self.prints = self.prints + 1
-                n = n.right
+
+                if not n.printed:
+                    print('there is right but no left n.value:')
+                    print(n.value)
+                    n.printed = True
+                    self.prints = self.prints + 1
+                    n = n.right
+                    print('n moved right')
+                else: #n.printed == True
+                    print('there is right, no left, and n.printed is true', n.value)
+                    n = n.up
+                    print('n moved up')
+
+
+                # if n.right.printed == False:
+                #     n = n.right
+                #     print('n moved to the right')
+                
+                # else: #n.right.printed == True
+                #     print('right already printed, n.value:')
+                #     print(n.value)
+                #     n.printed = True
+                #     self.prints = self.prints + 1
+                #     n = n.up
+                #     print('n moved up')
+                
             #case 4:
             if not n.left and not n.right:
+                print('no n.left nor n.right, n.value:')
                 print(n.value)
                 n.printed = True
                 self.prints = self.prints + 1
                 n = n.up
+                print('n moved up')
 
 
 
@@ -180,14 +257,21 @@ class BinarySearchTree:
             print('you did not select a valid traversal selection. run the program again...')
 
 
-tree = BinarySearchTree(10)
-tree.insert(5)
-tree.insert(4)
+tree = BinarySearchTree(5)
+tree.insert(6)
+tree.insert(2)
+tree.insert(1)
 tree.insert(3)
-tree.insert(100)
+tree.insert(10)
+tree.insert(4)
+tree.insert(7)
+tree.insert(8)
+tree.insert(9)
 # tree.morris_traverse()
 
-tree.for_each()
+# tree.morris_traverse()
+tree.depth_traverse_in()
+
 
  # start at self.head. set n = self.head.  
         # check n.left and n.right:
