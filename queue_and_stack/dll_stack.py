@@ -12,14 +12,18 @@ class Stack:
     def push(self, value):
         self.size = self.size + 1
         self.storage.prepend(value)
+        # return self.storage.head.value
 
     def pop(self):
+        if self.len() == 0:
+            return None
         self.size = self.size - 1
         head_val = self.storage.head.value
         self.storage.remove(head_val)
+        return head_val
 
     def len(self):
-        pass
+        return self.size
     
     def __repr__(self):
         return repr(self.storage)
