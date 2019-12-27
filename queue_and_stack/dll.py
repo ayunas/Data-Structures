@@ -22,12 +22,9 @@ class DLinkedList:
         return '[' + ', '.join(nodes) + ']'
 
     def prepend(self, val):
-
+        new_node = Node(val,None,self.head)
         if self.head is None:
             self.head = Node(val)
-        else:
-            new_node = Node(val,None,self.head)
-            self.head.prev = new_node
         self.head = new_node
     
     def append(self,val):
@@ -39,13 +36,13 @@ class DLinkedList:
             self.tail = self.tail.next
 
     def __remove_node__(self,node):
-        if node is self.head:
-            # node.next = None
-            self.head = self.head.next
         if node.prev:
             node.prev.next = node.next
         if node.next:
             node.next.prev = node.prev
+        if node is self.head:
+            # node.next = None
+            self.head = self.head.next
         node.prev = None
         node.next = None
     
@@ -62,16 +59,16 @@ class DLinkedList:
             n = n.next
         return n
 
-dll = DLinkedList()
-dll.append(30)
-dll.append(35)
-dll.append(40)
-dll.append(50)
-dll.prepend(10)
-dll.prepend(5)
-print(dll)
-dll.remove(30)
-print(dll)
+# dll = DLinkedList()
+# dll.append(30)
+# dll.append(35)
+# dll.append(40)
+# dll.append(50)
+# dll.prepend(10)
+# dll.prepend(5)
+# print(dll)
+# dll.remove(30)
+# print(dll)
 
 
 
