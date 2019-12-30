@@ -102,6 +102,9 @@ class BinarySearchTree:
 
     def get_max(self):
         pass
+    
+    def in_order(self):
+        print('you are in order')
 
     def depth_traverse_in(self):
         print('time to traverse the tree in depth in order!')
@@ -248,7 +251,7 @@ class BinarySearchTree:
                 self.depth_traverse_post()
             elif d=='3':
                 print('calling an in-order depth traversal')
-                self.depth_traverse_in()
+                self.in_order()
             else:
                 print('you did not select a valid type of depth traversal. running the in-order by default')
         elif t =='2':
@@ -270,7 +273,8 @@ tree.insert(9)
 # tree.morris_traverse()
 
 # tree.morris_traverse()
-tree.depth_traverse_in()
+tree.for_each()
+
 
 
  # start at self.head. set n = self.head.  
