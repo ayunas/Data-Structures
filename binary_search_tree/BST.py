@@ -22,7 +22,7 @@ class BST:
     def get_root(self):
         return self.root
     
-    def insert(self,root,val):
+    def insert(self,val,root=None):
         if root is None:
             root = Node(val)
         else:
@@ -30,12 +30,12 @@ class BST:
                 if root.left is None:
                     root.left = Node(val)
                 else:
-                    self.insert(root.left,val)
+                    self.insert(val,root.left)
             else:
                 if root.right is None:
                     root.right = Node(val)
                 else:
-                    self.insert(root.right,val)
+                    self.insert(val,root.right)
 
     
     def in_order_traverse(self,node=None):
@@ -82,6 +82,10 @@ class BST:
 
 tree = BST()
 tree.set_root(10,5,20)
+
 root = tree.get_root()
-tree.insert(root,100)
+tree.insert(100,root)
+tree.insert(40,root)
+tree.insert(150,root)
+
 tree.traverse()
