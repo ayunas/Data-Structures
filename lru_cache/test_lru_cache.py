@@ -1,5 +1,6 @@
 import unittest
-from lru_cache import LRUCache
+# from lru_cache import LRUCache
+from lru_cache_v2 import LRUCache
 
 
 class CacheTests(unittest.TestCase):
@@ -12,6 +13,7 @@ class CacheTests(unittest.TestCase):
         self.cache.set('item3', 'c')
 
         self.cache.set('item2', 'z')
+        self.cache.print()
 
         self.assertEqual(self.cache.get('item1'), 'a')
         self.assertEqual(self.cache.get('item2'), 'z')

@@ -34,7 +34,6 @@ class ListNode:
         if self.next:
             self.next.prev = self.prev
 
-
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
 
@@ -48,20 +47,78 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
+    def display(self):
+        n = self.head
+        while n != None :
+            print('\t')
+            print(n.value)
+            if n.prev:
+                print('n.prev', n.prev.value)
+            else:
+                print('no prev value for', n.value)
+            if n.next:
+                print('n.next', n.next.value)
+            else:
+                print('no next value for ', n.value)
+            
+            n = n.next
+
+
     def add_to_head(self, value):
-        pass
+        old_head = self.head
+        # old_next = self.head.next
+        self.head = ListNode(value)
+        self.head.next = old_head
+        old_head.prev = self.head
+
 
     def remove_from_head(self):
-        pass
+        if self.head.next == None:
+            self.head = None
+        else:
+            self.head = self.head.next
 
     def add_to_tail(self, value):
-        pass
+        n = self.head
+        while n.next != None:
+            prev = n
+            n = n.next
+            n.prev = prev
+
+        n.next = ListNode(value)
+        n.next.prev = n
+        self.tail = n.next
 
     def remove_from_tail(self):
-        pass
+        print('self.tail in remove_from_tail', self.tail.value, self.tail.prev.value)
+        self.tail.prev.next = None
+        self.tail = self.tail.prev
 
     def move_to_front(self, node):
-        pass
+        if self.head == node:
+            print('node already at head')
+            return self.head
+        # if self.tail == node:
+        #     print('you hit the tail!')
+        #     print('self.tail', self.tail.value, 'self.head', self.head.value)
+        #     old_tail = self.tail
+        #     old_head = self.head
+        #     print(old_tail.value,old_head.value)
+        #     self.tail = old_tail.prev
+        #     old_tail.prev = None
+        #     self.head = old_tail
+        #     self.head.next = old_head
+        #     # self.tail.prev = self.tail
+        #     # self.tail.next = self.head
+        #     # self.head = self.tail
+            
+        if node.prev and node.next:
+            print('node.prev.next: ', node.prev.next.value, 'node.next: ', node.next.value)
+            node.prev.next = node.next  #point the prev node of the LRU node to the LRU's next node
+            node.prev = None  #becasue LRU node going to head, prev is None
+            node.next = self.head  #LRU node at head, so the next node pointing to the current self.head node
+            self.head = node  #officially make the self.head equal to the LRU node
+            return self.head
 
     def move_to_end(self, node):
         pass
